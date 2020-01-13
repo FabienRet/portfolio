@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for project in projects %}
+    {{ project.title }}
+    {{ project.content }}
+    <img src='{{asset('img/portfolio/'~project.imageFilename)}}' alt="image">
+    {% endfor %}
+
+{% endblock %}

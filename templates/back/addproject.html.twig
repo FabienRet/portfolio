@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un projet{% endblock %}
+{% block body %}
+    {{ form_start(projectForm) }}
+    {{ form_row(projectForm.title, {
+        label: 'Article title'
+    }) }}
+    {{ form_row(projectForm.content) }}
+    {{ form_row(projectForm.image) }}
+
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(projectForm) }}
+{% endblock %}
