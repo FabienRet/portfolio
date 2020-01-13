@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="../{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="../{{ asset('css/freelancer.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+
+
+    {{ form_start(myInfoForm) }}
+    {{ form_row(myInfoForm.firstName)}}
+    {{ form_row(myInfoForm.lastName) }}
+    {{ form_row(myInfoForm.address) }}
+    {{ form_row(myInfoForm.postalCode)}}
+    {{ form_row(myInfoForm.town)}}
+    {{ form_row(myInfoForm.email)}}
+
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(myInfoForm) }}
+{% endblock %}

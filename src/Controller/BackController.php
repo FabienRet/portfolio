@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
-use App\Form\ArticleFormType;
+use App\Entity\CompetenceCv;
+use App\Entity\CourseCv;
+use App\Entity\MyInfo;
+use App\Form\CompetenceCvForm;
+use App\Form\CourseCvForm;
+use App\Form\MyInfoFormType;
 use App\Form\ProjectFormType;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -81,6 +85,87 @@ class BackController extends AbstractController
         return $this->render('back/list.html.twig', [
             'projects' => $project
         ]);
+    }
+
+    /**
+     * @Route("/admin/myCV", name="modify_cv")
+     */
+    public function modifyCv(){
+        return $this->render('back/modifyCv.html.twig');
+    }
+
+    /**
+     * @Route("/admin/myInfo", name="modify_infos")
+     */
+    public function myInfosCv(Request $request, EntityManagerInterface $em){
+        $form = $this->createForm(MyInfoFormType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var MyInfo $myInfos */
+            $myInfos = $form->getData();
+            $em->persist($myInfos);
+            $em->flush();
+
+            $this->addFlash('success', 'Article created! Knowledge is power !');
+
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('back/myInfosCv.html.twig', [
+            'myInfoForm' => $form->createView()
+        ]);
+
+        }
+
+
+    /**
+     * @Route("/admin/myCompetence", name="modify_competence")
+     */
+    public function competenceCv(Request $request, EntityManagerInterface $em){
+        $form = $this->createForm(CompetenceCvForm::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var CompetenceCv $competence */
+            $competence = $form->getData();
+            $em->persist($competence);
+            $em->flush();
+
+            $this->addFlash('success', 'Article created! Knowledge is power !');
+
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('back/modifyCompetence.html.twig', [
+            'competenceForm' => $form->createView()
+        ]);
+
+    }
+
+
+    /**
+     * @Route("/admin/myCourse", name="modify_course")
+     */
+    public function courseCv(Request $request, EntityManagerInterface $em){
+        $form = $this->createForm(CourseCvForm::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var CourseCv $courseCv */
+            $courseCv = $form->getData();
+            $em->persist($courseCv);
+            $em->flush();
+
+            $this->addFlash('success', 'Article created! Knowledge is power !');
+
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('back/modifyCourse.html.twig', [
+            'courseCvForm' => $form->createView()
+        ]);
+
     }
 
 }

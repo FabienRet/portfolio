@@ -3,5 +3,19 @@
 {% block title %}CV Fabien Retailleau{% endblock %}
 
 {% block body %}
-    <h1>A FAIRE</h1>
+    <img src="{{ asset('img/portfolio/photo.png') }}">
+
+    {% for myInfo in myInfos %}
+    {{ myInfo.lastName }}
+    {{ myInfo.firstName }}
+        {{ myInfo.address }}
+        {{ myInfo.postalCode }}
+        {{ myInfo.town }}
+        {{ myInfo.email }}
+
+    {% endfor %}
+
+    <h2>Mes compétences</h2>
+
+    <h2>Mon parcours</h2>
 {% endblock %}
