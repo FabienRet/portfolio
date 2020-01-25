@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier compétence{% endblock %}
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+    <h1 class="text-center">Modifier compétence</h1>
+    </header>
+
+    {{ include('competence_cv/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin') }}">Retour</a>
+
+    {{ include('competence_cv/_delete_form.html.twig') }}
+{% endblock %}

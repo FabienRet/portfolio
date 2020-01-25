@@ -2,8 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Email;
+use App\Form\EmailFormType;
+use App\Repository\AboutContentRepository;
+use App\Repository\CompetenceCvRepository;
+use App\Repository\CourseCvRepository;
 use App\Repository\MyInfoRepository;
+use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FrontController extends AbstractController
@@ -11,21 +18,52 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="front")
      */
-    public function index()
+    public function index(ProjectRepository $projectRepository, Request $request, \Swift_Mailer $mailer, AboutContentRepository $aboutContentRepository)
     {
+        $email = new Email();
+        $form = $this->createForm(EmailFormType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $message = (new \Swift_Message($data->getTitle()))
+                ->setFrom($data->getEmail())
+                ->setTo('fabienretailleau@hotmail.fr')
+                ->setBody(
+                    $this->renderView('back/email.html.twig',[
+                        'title'=> $data->getTitle(),
+                        'name' => $data->getName(),
+                        'content' => $data->getContent(),
+                        'emails' => $data->getEmail()
+                    ])
+                );
+
+            $mailer->send($message);
+
+            return $this->redirectToRoute('front');
+        }
+
+        $about = $aboutContentRepository->findAll();
+        $myProjects = $projectRepository->findAll();
         return $this->render('front/index.html.twig', [
-            'controller_name' => 'FrontController',
+            'myProjects' => $myProjects,
+            'emails' => $email,
+            'about_contents' => $about,
+            'form' =>$form->createView()
         ]);
     }
 
     /**
      * @Route("/cv", name="cv")
      */
-    public function cv(MyInfoRepository $myInfoRepository){
+    public function cv(MyInfoRepository $myInfoRepository, CourseCvRepository $courseCvRepository, CompetenceCvRepository $competenceCvRepository){
 
+        $myCompetences = $competenceCvRepository->findAll();
         $myInfos = $myInfoRepository->findAll();
+        $myCourses = $courseCvRepository->findBy(array(), array('date_end' => 'DESC'));
         return $this->render('front/cv.html.twig', [
-            'myInfos' => $myInfos
+            'myInfos' => $myInfos,
+            'myCourses' => $myCourses,
+            'myCompetences' => $myCompetences
         ]);
     }
 }

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle compétence{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+    <h1 class="text-center">Ajouter une nouvelle compétence</h1>
+    </header>
+
+    {{ include('competence_cv/_form.html.twig') }}
+
+    <a href="{{ path('admin') }}#nav-competence">Retour</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau projet{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+    <h1 class="text-center">Ajouter un nouveau projet</h1>
+    </header>
+
+    {{ include('project/_form.html.twig') }}
+
+    <a href="{{ path('admin') }}">Retour</a>
+{% endblock %}

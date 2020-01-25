@@ -2,20 +2,42 @@
 
 {% block title %}CV Fabien Retailleau{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="../{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="../{{ asset('css/freelancer.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <img src="{{ asset('img/portfolio/photo.png') }}">
+    {{ parent() }}
+    <header class="masthead">
+    <div class="container-fluid">
+        <div class="row justify-content-between">
+            {% for myInfo in myInfos %}
+                <ul class="list-group">
+                    <li>{{ myInfo.lastName }} {{ myInfo.firstName }}</li>
+                    <li>{{ myInfo.address }}</li>
+                    <li>{{ myInfo.postalCode }}</li>
+                    <li>{{ myInfo.town }}</li>
+                    <li>{{ myInfo.email }}</li>
+                </ul>
 
-    {% for myInfo in myInfos %}
-    {{ myInfo.lastName }}
-    {{ myInfo.firstName }}
-        {{ myInfo.address }}
-        {{ myInfo.postalCode }}
-        {{ myInfo.town }}
-        {{ myInfo.email }}
+            {% endfor %}
 
+    <img src="{{ asset('img/portfolio/photo.png') }}" alt="photo_cv">
+
+
+        </div>
+    </div>
+    </header>
+    <h2 class="text-center">Mes compétences</h2>
+    <br>
+    {% for myCompetence in myCompetences %}
+        <div class="d-flex "><div class="col-3">{{ myCompetence.title }} : </div><div class="col">{{ myCompetence.content|raw }}</div></div><br>
     {% endfor %}
 
-    <h2>Mes compétences</h2>
-
-    <h2>Mon parcours</h2>
+    <h2 class="text-center">Mon parcours</h2><br>
+    {% for myCourse in myCourses %}
+        <div class="d-flex "><div class="col-3">{{ myCourse.dateStart }} - {{ myCourse.dateEnd }} : </div><div class="col">{{ myCourse.title }}<p>{{ myCourse.content }}</p></div></div><br>
+    {% endfor %}
 {% endblock %}

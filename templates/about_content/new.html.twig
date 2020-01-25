@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}nouveau A propos{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+        <h1 class="text-center">Nouveau contenu A propos</h1>
+    </header>
+
+    {{ include('about_content/_form.html.twig') }}
+
+    <a href="{{ path('admin') }}">Retour</a>
+{% endblock %}

@@ -17,48 +17,30 @@ class CourseCv
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
-    private $dateStart;
+    private $title;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="integer")
+     */
+    private $date_start;
+
+    /**
+     * @ORM\Column(type="integer")
      */
     private $date_end;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $title;
+    private $content;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateStart(): ?\DateTimeInterface
-    {
-        return $this->dateStart;
-    }
-
-    public function setDateStart(\DateTimeInterface $dateStart): self
-    {
-        $this->dateStart = $dateStart;
-
-        return $this;
-    }
-
-    public function getDate_end(): ?\DateTimeInterface
-    {
-        return $this->date_end;
-    }
-
-    public function setDate_end(\DateTimeInterface $date_end): self
-    {
-        $this->date_end = $date_end;
-
-        return $this;
-    }
 
     public function getTitle(): ?string
     {
@@ -68,6 +50,42 @@ class CourseCv
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getDateStart(): ?int
+    {
+        return $this->date_start;
+    }
+
+    public function setDateStart(int $date_start): self
+    {
+        $this->date_start = $date_start;
+
+        return $this;
+    }
+
+    public function getDateEnd(): ?int
+    {
+        return $this->date_end;
+    }
+
+    public function setDateEnd(int $date_end): self
+    {
+        $this->date_end = $date_end;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

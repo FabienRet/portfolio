@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier parcours{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+    <h1 class="text-center">Modification du parcours</h1>
+    </header>
+
+    {{ include('course_cv/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin') }}">Retour</a>
+
+    {{ include('course_cv/_delete_form.html.twig') }}
+{% endblock %}

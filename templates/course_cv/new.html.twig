@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier parcours{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+    <h1 class="text-center">Ajouter une nouvelle date</h1>
+    </header>
+
+    {{ include('course_cv/_form.html.twig') }}
+
+    <a href="{{ path('admin') }}#nav-course">Retour</a>
+{% endblock %}

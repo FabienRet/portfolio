@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="../{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="../{{ asset('css/freelancer.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
+    {{ parent() }}
+    <header class="masthead"></header>
     {% for project in projects %}
     {{ project.title }}
     {{ project.content }}

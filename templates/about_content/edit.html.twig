@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier A propos{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <header class="masthead">
+        <h1 class="text-center">Modifier à propos</h1>
+    </header>
+
+    {{ include('about_content/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin') }}">Retour</a>
+
+    {{ include('about_content/_delete_form.html.twig') }}
+{% endblock %}

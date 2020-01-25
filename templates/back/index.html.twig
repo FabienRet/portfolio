@@ -1,36 +1,175 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Administration{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link href="../{{ asset('fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="../{{ asset('css/freelancer.css') }}" rel="stylesheet">
-{% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-        <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="{{ path('front') }}">Accueil</a>
-            <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('front') }}#portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('add_project') }}">Ajouter un projet</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('modify_cv') }}">Modifier CV</a>
-                    </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('app_logout') }}">Logout</a>
-                        </li>
-                </ul>
+    {{ parent() }}
+    <header class="masthead text-center">
+        <nav>
+            <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Mes infos</a>
+                <a class="nav-item nav-link" id="nav-competence-tab" data-toggle="tab" href="#nav-competence" role="tab" aria-controls="nav-competence" aria-selected="false">Mes compétences</a>
+                <a class="nav-item nav-link" id="nav-course-tab" data-toggle="tab" href="#nav-course" role="tab" aria-controls="nav-course" aria-selected="false">Mon parcours</a>
+                <a class="nav-item nav-link" id="nav-project-tab" data-toggle="tab" href="#nav-project" role="tab" aria-controls="nav-project" aria-selected="false">Mes projets</a>
+                <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">A propos</a>
             </div>
-        </div>
-    </nav>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                <h1>Mes infos</h1>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
+                        <th>Code Postal</th>
+                        <th>Ville</th>
+                        <th>Email</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for my_info in my_infos %}
+                        <tr>
+                            <td>{{ my_info.firstName }}</td>
+                            <td>{{ my_info.lastName }}</td>
+                            <td>{{ my_info.address }}</td>
+                            <td>{{ my_info.postalCode }}</td>
+                            <td>{{ my_info.town }}</td>
+                            <td>{{ my_info.email }}</td>
+                            <td>
+                                <a href="{{ path('my_info_edit', {'id': my_info.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">Aucune informations</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-competence" role="tabpanel" aria-labelledby="nav-competence-tab">
+                <h1>Mes compétences</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Contenu</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for competence_cv in competence_cvs %}
+                        <tr>
+                            <td>{{ competence_cv.title }}</td>
+                            <td>{{ competence_cv.content }}</td>
+                            <td>
+                                <a href="{{ path('competence_cv_edit', {'id': competence_cv.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Aucune donnée</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('competence_cv_new') }}">Nouvelle compétence</a>
+            </div>
+            <div class="tab-pane fade" id="nav-course" role="tabpanel" aria-labelledby="nav-course-tab">
+                <h1>Mon parcours</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Date début</th>
+                        <th>Date fin</th>
+                        <th>Titre</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course_cv in course_cvs %}
+                        <tr>
+                            <td>{{ course_cv.dateStart }}</td>
+                            <td>{{ course_cv.dateEnd }}</td>
+                            <td>{{ course_cv.title }}</td>
+                            <td>
+                                <a href="{{ path('course_cv_edit', {'id': course_cv.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucune date enregistré</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('course_cv_new') }}">Nouvelle date</a>
+            </div>
+            <div class="tab-pane fade" id="nav-project" role="tabpanel" aria-labelledby="nav-project-tab">
+                <h1>Mes projets</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Titre</th>
+                        <th>URL</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for project in projects %}
+                        <tr>
+                            <td><img src="img/portfolio/{{ project.imageFilename }}" alt="" class="h-50 w-50"></td>
+                            <td>{{ project.title }}</td>
+                            <td>{{ project.url }}</td>
+                            <td>
+                                <a href="{{ path('project_edit', {'id': project.id}) }}">Modifier</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun projet enregistré</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('add_project') }}">Nouveau projet</a>
+            </div>
+            <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+            <h1>A propos</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Contenu</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for about_content in about_contents %}
+                    <tr>
+                        <td>{{ about_content.content }}</td>
+                        <td>
+                            <a href="{{ path('about_content_edit', {'id': about_content.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Rien d'enregistrer</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('about_content_new') }}">Nouveau contenu</a>
+            </div>
+    </header>
 {% endblock %}
