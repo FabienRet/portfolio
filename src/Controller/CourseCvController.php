@@ -31,7 +31,9 @@ class CourseCvController extends AbstractController
             $entityManager->persist($courseCv);
             $entityManager->flush();
 
-            return $this->redirectToRoute('modify_cv');
+            $this->addFlash('success', 'Nouvelle date de parcours ajoutée !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('course_cv/new.html.twig', [
@@ -51,7 +53,9 @@ class CourseCvController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('modify_cv');
+            $this->addFlash('success', 'Parcours modifié !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('course_cv/edit.html.twig', [
@@ -71,6 +75,8 @@ class CourseCvController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('modify_cv');
+        $this->addFlash('success', 'La date a bien été supprimé !');
+
+        return $this->redirectToRoute('admin');
     }
 }

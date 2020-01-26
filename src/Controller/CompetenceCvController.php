@@ -30,7 +30,9 @@ class CompetenceCvController extends AbstractController
             $entityManager->persist($competenceCv);
             $entityManager->flush();
 
-            return $this->redirectToRoute('modify_cv');
+            $this->addFlash('success', 'Nouvelle compétence ajoutée !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('competence_cv/new.html.twig', [
@@ -50,7 +52,9 @@ class CompetenceCvController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('modify_cv');
+            $this->addFlash('success', 'Compétence modifié !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('competence_cv/edit.html.twig', [
@@ -70,6 +74,8 @@ class CompetenceCvController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('modify_cv');
+        $this->addFlash('success', 'Compétence supprimée !');
+
+        return $this->redirectToRoute('admin');
     }
 }

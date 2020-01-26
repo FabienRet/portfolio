@@ -28,7 +28,9 @@ class MyInfoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('modify_cv');
+            $this->addFlash('success', 'Vos infos ont bien été modifiées !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('my_info/edit.html.twig', [
@@ -48,6 +50,8 @@ class MyInfoController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('my_info_index');
+        $this->addFlash('success', 'Vos infos ont bien été supprimées !');
+
+        return $this->redirectToRoute('admin');
     }
 }

@@ -9,9 +9,15 @@
 
 {% block body %}
     {{ parent() }}
+
     <!-- Masthead -->
     <div id="page-top"></div>
     <header class="masthead bg-primary text-white text-center">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <div class="container d-flex align-items-center flex-column">
 
             <!-- Masthead Avatar Image -->
@@ -91,7 +97,7 @@
             <!-- About Section Content -->
             <div class="row">
                 {% for about in about_contents %}
-                <div class="col-lg-4 ml-auto">
+                <div class="col-lg-4 ml-auto mr-auto">
                     <p class="lead">{{ about.content }}</p>
                 </div>
                 {% endfor %}
@@ -117,6 +123,7 @@
             </div>
 
             <!-- Contact Section Form -->
+
             {{ form_start(form) }}
             <div class="row">
                 <div class="col-lg-8 mx-auto">

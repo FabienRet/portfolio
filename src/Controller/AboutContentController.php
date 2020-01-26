@@ -39,7 +39,9 @@ class AboutContentController extends AbstractController
             $entityManager->persist($aboutContent);
             $entityManager->flush();
 
-            return $this->redirectToRoute('about_content_index');
+            $this->addFlash('success', 'A propos a bien été modifié !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('about_content/new.html.twig', [
@@ -48,15 +50,6 @@ class AboutContentController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="about_content_show", methods={"GET"})
-     */
-    public function show(AboutContent $aboutContent): Response
-    {
-        return $this->render('about_content/show.html.twig', [
-            'about_content' => $aboutContent,
-        ]);
-    }
 
     /**
      * @Route("/{id}/edit", name="about_content_edit", methods={"GET","POST"})
@@ -69,7 +62,9 @@ class AboutContentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('about_content_index');
+            $this->addFlash('success', 'A propos a bien été modifié !');
+
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('about_content/edit.html.twig', [
@@ -89,6 +84,8 @@ class AboutContentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('about_content_index');
+        $this->addFlash('success', 'A propos a bien été modifié !');
+
+        return $this->redirectToRoute('admin');
     }
 }

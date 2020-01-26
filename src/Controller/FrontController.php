@@ -39,6 +39,8 @@ class FrontController extends AbstractController
 
             $mailer->send($message);
 
+            $this->addFlash('success', 'Votre mesage a bien été envoyé !');
+
             return $this->redirectToRoute('front');
         }
 

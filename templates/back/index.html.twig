@@ -5,6 +5,11 @@
 {% block body %}
     {{ parent() }}
     <header class="masthead text-center">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <nav>
             <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Mes infos</a>

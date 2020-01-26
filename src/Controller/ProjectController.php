@@ -52,7 +52,7 @@ class ProjectController extends AbstractController
 
 
 
-            $this->addFlash('success', 'Article created! Knowledge is power !');
+            $this->addFlash('success', 'Le projet a bien été créé !');
 
 
             return $this->redirect($this->generateUrl('admin'));
@@ -75,6 +75,8 @@ class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Le projet a bien été modifié !');
+
             return $this->redirectToRoute('admin');
         }
 
@@ -95,6 +97,8 @@ class ProjectController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('project_index');
+        $this->addFlash('success', 'Le projet a bien été supprimé !');
+
+        return $this->redirectToRoute('admin');
     }
 }
