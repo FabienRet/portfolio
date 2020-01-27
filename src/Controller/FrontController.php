@@ -34,7 +34,8 @@ class FrontController extends AbstractController
                         'name' => $data->getName(),
                         'content' => $data->getContent(),
                         'emails' => $data->getEmail()
-                    ])
+                    ]),
+                    'text/html'
                 );
 
             $mailer->send($message);
