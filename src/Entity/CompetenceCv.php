@@ -19,13 +19,13 @@ class CompetenceCv
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Titre obligatoire")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Contenu obligatoire")
      */
     private $content;
 

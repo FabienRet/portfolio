@@ -19,7 +19,7 @@ class AboutContent
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Vous devez remplir ce champs")
      */
     private $content;
 

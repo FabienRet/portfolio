@@ -19,27 +19,26 @@ class Email
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Merci de laisser votre nom")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
+     * @Assert\NotBlank(message="Merci de laisser votre email")
      * @Assert\Email()
-     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Laissez un message")
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Merci de mettre un objet")
      */
     private $title;
 

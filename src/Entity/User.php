@@ -9,7 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity("email")
+ * @UniqueEntity(fields={"email"},
+ *     message="Vous êtes déjà inscrit")
  */
 class User implements UserInterface
 {
@@ -22,26 +23,25 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Champs mail vide")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
-     * @Assert\NotBlank()
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Mot de passe obligatoire")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Pseudo obligatoire")
      */
     private $name;
 

@@ -11,6 +11,7 @@ use App\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /** @IsGranted("ROLE_ADMIN") */
 class BackController extends AbstractController
@@ -32,5 +33,9 @@ class BackController extends AbstractController
             'competence_cvs' => $myCompetences,
             'course_cvs' => $myCourse
         ]);
+    }
+
+    public function aboutCompetence(){
+
     }
 }

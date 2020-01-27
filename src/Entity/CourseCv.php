@@ -19,25 +19,25 @@ class CourseCv
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Titre obligatoire")
      */
     private $title;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Date obligatoire")
      */
     private $date_start;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Date obligatoire")
      */
     private $date_end;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="contenu obligatoire")
      */
     private $content;
 

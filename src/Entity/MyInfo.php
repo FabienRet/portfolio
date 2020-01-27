@@ -19,39 +19,38 @@ class MyInfo
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Prénom obligatoire")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Nom obligatoire")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Adresse obligatoire")
      */
     private $address;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Code Postal obligatoire")
      */
     private $postalCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Ville obligatoire")
      */
     private $town;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
+     * @Assert\NotBlank(message="Email obligatoire")
      * @Assert\Email()
-     * )
      */
     private $email;
 
