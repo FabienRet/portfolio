@@ -9,9 +9,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
-/**
- * @IsGranted("ROLE_ADMIN")
- */
 class SecurityController extends AbstractController
 {
     /**

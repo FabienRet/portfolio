@@ -127,7 +127,6 @@
             {{ form_start(form) }}
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <div class="control-group">
                             <div class="form-group controls mb-0 pb-2">
                                 {{ form_row(form.name, {
@@ -163,10 +162,11 @@
                         </div>
             </div>
             </div>
+            {{ form_end(form) }}
         </div>
-        </div>
+
     </section>
-{{ form_end(form) }}
+
     <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
@@ -219,7 +219,7 @@
 
     <!-- Portfolio Modal 1 -->
     {% for myProject in myProjects %}
-    <div class="portfolio-modal modal fade" id="portfolioModal{{ myProject.id }}" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+    <div class="portfolio-modal modal fade" id="portfolioModal{{ myProject.id }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -246,7 +246,7 @@
                                 <!-- Portfolio Modal - Text -->
                                 <p class="mb-5">{{ myProject.content}}</p>
                                 <p class="mb-5">Accès au site : <a href="{{ myProject.url }}">{{ myProject.url }}</a></p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                <button class="btn btn-primary"  data-dismiss="modal">
                                     <i class="fas fa-times fa-fw"></i>
                                     Fermer
                                 </button>
