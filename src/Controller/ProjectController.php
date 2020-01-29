@@ -69,7 +69,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/admin/{id}/edit", name="project_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Project $project): Response
+    public function edit(Request $request, Project $project, EntityManagerInterface $em): Response
     {
 
         $form = $this->createForm(ProjectFormType::class, $project);
@@ -77,8 +77,28 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            /** @var UploadedFile $projectFile */
+            $projectFile = $form['image']->getData();
 
+            if($projectFile){
+                $projectFilename = pathinfo($projectFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $projectFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$projectFile->guessExtension();
+
+                try {
+                    $projectFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e){
+
+                }
+
+            }
+            $project = $form->getData();
+            $project->setImageFilename($newFilename);
+            $em->persist($project);
+            $em->flush();
             $this->addFlash('success', 'Le projet a bien été modifié !');
 
             return $this->redirectToRoute('admin');
