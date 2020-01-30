@@ -9,6 +9,7 @@ use App\Repository\CompetenceCvRepository;
 use App\Repository\CourseCvRepository;
 use App\Repository\MyInfoRepository;
 use App\Repository\ProjectRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,13 @@ class FrontController extends AbstractController
     /**
      * @Route("/", name="front")
      */
-    public function index(ProjectRepository $projectRepository, Request $request, \Swift_Mailer $mailer, AboutContentRepository $aboutContentRepository)
+    public function index(ProjectRepository $projectRepository, Request $request, \Swift_Mailer $mailer, AboutContentRepository $aboutContentRepository, PaginatorInterface $paginator)
     {
+        $myProject = $projectRepository->findAll();
+        $pagination = $paginator->paginate(
+            $myProject,
+            $request->query->getInt('page', 1), 6
+        );
         $email = new Email();
         $form = $this->createForm(EmailFormType::class);
         $form->handleRequest($request);
@@ -46,9 +52,9 @@ class FrontController extends AbstractController
         }
 
         $about = $aboutContentRepository->findAll();
-        $myProjects = $projectRepository->findAll();
+        //
         return $this->render('front/index.html.twig', [
-            'myProjects' => $myProjects,
+            'myProjects' => $pagination,
             'emails' => $email,
             'about_contents' => $about,
             'form' =>$form->createView()

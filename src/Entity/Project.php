@@ -31,7 +31,6 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Il n'y a pas d'image")
      */
     private $imageFilename;
 

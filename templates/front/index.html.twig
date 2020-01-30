@@ -56,7 +56,7 @@
                 </div>
                 <div class="divider-custom-line"></div>
             </div>
-
+<div id="project-pagination">
             <!-- Portfolio Grid Items -->
             <div class="row">
             {% for myProject in myProjects %}
@@ -73,8 +73,11 @@
                 </div>
             {% endfor %}
 
+
             <!-- /.row -->
             </div>
+            <div class="container">{{ knp_pagination_render(myProjects) }}</div>
+</div>
         </div>
     </section>
 
@@ -275,4 +278,5 @@
 
 <!-- Custom scripts for this template -->
 <script src="js/freelancer.min.js"></script>
+
 {% endblock %}
