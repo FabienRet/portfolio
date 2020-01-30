@@ -19,7 +19,7 @@ class BackController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(ProjectRepository $projectRepository, MyInfoRepository $myInfoRepository, CompetenceCvRepository $competenceCvRepository, CourseCvRepository $courseCvRepository, AboutContentRepository $aboutContentRepository)
+    public function index(ProjectRepository $projectRepository, MyInfoRepository $myInfoRepository, CompetenceCvRepository $competenceCvRepository, CourseCvRepository $courseCvRepository, AboutContentRepository $aboutContentRepository, ValidatorInterface $validator)
     {
         $about = $aboutContentRepository->findAll();
         $my_infos = $myInfoRepository->findAll();
@@ -33,9 +33,5 @@ class BackController extends AbstractController
             'competence_cvs' => $myCompetences,
             'course_cvs' => $myCourse
         ]);
-    }
-
-    public function aboutCompetence(){
-
     }
 }
