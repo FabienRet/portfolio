@@ -1,19 +1,16 @@
 Portfolio Fabien Retailleau
 ========================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
-
 Requirements
 ------------
 
   * PHP 7.2.9 or higher;
   * PDO-SQLite PHP extension enabled;
-  * and the [usual Symfony application requirements][2].
+  * and the [usual Symfony application requirements].
 
 Installation
 ------------
-
+Remember to load vendor files
 
 ```bash
 $ git clone https://github.com/FabienRet/portfolio.git
